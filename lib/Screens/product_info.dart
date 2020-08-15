@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:technology/models/cart.dart';
 
 class ProductInfo extends StatelessWidget {
   // ProductModel productmodel;
@@ -13,7 +15,7 @@ class ProductInfo extends StatelessWidget {
     final prodidd = productdet['id'];
     final prodtitle = productdet['titlep'];
     final prodprice = productdet['price'];
-
+    final cartfunc = Provider.of<CartProvider>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -79,9 +81,9 @@ class ProductInfo extends StatelessWidget {
                     Icons.remove_circle_outline,
                     size: 35,
                   ),
-                  onPressed: null),
+                  onPressed: () {}),
               Text(
-                '1',
+                cartfunc.itemcount().toString(),
                 style: TextStyle(fontSize: 25),
               ),
               IconButton(
@@ -89,7 +91,9 @@ class ProductInfo extends StatelessWidget {
                     Icons.add_circle_outline,
                     size: 35,
                   ),
-                  onPressed: null),
+                  onPressed: () {
+                    // cartfunc.additems(prodidd, prodtitle, prodprice, prodinnnn);
+                  }),
               SizedBox(width: 150),
               Text(
                 '\$$prodprice',

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:technology/Screens/product_info.dart';
+import 'package:technology/models/cart.dart';
 import 'package:technology/models/product.dart';
 
 class ProductCarosel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final dummyinfo = Provider.of<ProductsProvider>(context);
+    final dummyinfocart = Provider.of<CartProvider>(context);
+    final dummyinfodata = dummyinfo.dummyproducts;
     return Column(
       children: [
         Padding(
@@ -36,9 +41,9 @@ class ProductCarosel extends StatelessWidget {
           height: 300.0,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: dummyproducts.length,
+              itemCount: dummyinfodata.length,
               itemBuilder: (context, index) {
-                ProductModel dumprod = dummyproducts[index];
+                ProductModel dumprod = dummyinfodata[index];
                 return Container(
                   margin: EdgeInsets.all(10.0),
                   width: 210.0,
@@ -64,9 +69,18 @@ class ProductCarosel extends StatelessWidget {
                                       fontWeight: FontWeight.w600),
                                 ),
                                 subtitle: Text('\$${dumprod.price}'),
-                                trailing: Icon(
-                                  FontAwesomeIcons.plusCircle,
-                                  color: Theme.of(context).primaryColor,
+                                trailing: GestureDetector(
+                                  onTap: () {
+                                    dummyinfocart.additems(
+                                        dumprod.id,
+                                        dumprod.title,
+                                        dumprod.price,
+                                        dumprod.imgurl);
+                                  },
+                                  child: Icon(
+                                    FontAwesomeIcons.plusCircle,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
                                 ),
                               ),
                             ],

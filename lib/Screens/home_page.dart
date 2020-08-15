@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:technology/Screens/cart_screen.dart';
+import 'package:technology/models/cart.dart';
+
 import 'package:technology/widgets/other_products_carosel.dart';
 import 'package:technology/widgets/product_carosel.dart';
 
@@ -9,14 +13,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currenttab = 0;
   int _selectedindex = 0;
   List<IconData> _icons = [
-    FontAwesomeIcons.feather,
-    FontAwesomeIcons.fedex,
-    FontAwesomeIcons.female,
-    FontAwesomeIcons.fileAudio
+    FontAwesomeIcons.home,
+    FontAwesomeIcons.heart,
+    FontAwesomeIcons.search
   ];
+  List<Widget> pages = [CartScreen()];
 
   Widget _buildIcon(int index) {
     return GestureDetector(
@@ -35,7 +38,7 @@ class _HomePageState extends State<HomePage> {
             borderRadius: BorderRadius.circular(30.0)),
         child: Icon(
           _icons[index],
-          size: 25.0,
+          size: 20.0,
           color: _selectedindex == index
               ? Theme.of(context).primaryColor
               : Color(0xffb4c1c4),
@@ -72,31 +75,6 @@ class _HomePageState extends State<HomePage> {
           OtherCarosel()
         ]),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currenttab,
-          onTap: (int value) {
-            setState(() {
-              _currenttab = value;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              title: SizedBox.shrink(),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.feather),
-              title: SizedBox.shrink(),
-            ),
-            BottomNavigationBarItem(
-              icon: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    'https://images.unsplash.com/photo-1496440737103-cd596325d314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'),
-                radius: 15.0,
-              ),
-              title: SizedBox.shrink(),
-            ),
-          ]),
     );
   }
 }
