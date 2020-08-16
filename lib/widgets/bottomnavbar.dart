@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:technology/Screens/cart_screen.dart';
 import 'package:technology/Screens/home_page.dart';
+import 'package:technology/Screens/userinfo_screen.dart';
 import 'package:technology/models/cart.dart';
 import 'package:technology/widgets/badge.dart';
 
@@ -12,7 +13,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  List<Widget> _pages = [HomePage(), CartScreen()];
+  List<Widget> _pages = [HomePage(), CartScreen(), UserInfoScreen()];
   int _currenttab = 0;
   @override
   Widget build(BuildContext context) {

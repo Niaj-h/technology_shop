@@ -76,6 +76,20 @@ class ProductCarosel extends StatelessWidget {
                                         dumprod.title,
                                         dumprod.price,
                                         dumprod.imgurl);
+                                    Scaffold.of(context).hideCurrentSnackBar();
+                                    Scaffold.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Added item to cart!',
+                                        ),
+                                        duration: Duration(seconds: 1),
+                                        action: SnackBarAction(
+                                          label: 'UNDO',
+                                          textColor: Colors.red,
+                                          onPressed: () {},
+                                        ),
+                                      ),
+                                    );
                                   },
                                   child: Icon(
                                     FontAwesomeIcons.plusCircle,

@@ -3,11 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:technology/Screens/cart_screen.dart';
 import 'package:technology/Screens/product_info.dart';
+import 'package:technology/Screens/useredit_form.dart';
 import 'package:technology/models/cart.dart';
 import 'package:technology/widgets/bottomnavbar.dart';
 import './models/product.dart';
-
-import 'Screens/home_page.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -37,7 +36,8 @@ class MyApp extends StatelessWidget {
         home: BottomNavBar(),
         routes: {
           ProductInfo.routeName: (context) => ProductInfo(),
-          CartScreen.routeName: (context) => CartScreen()
+          CartScreen.routeName: (context) => CartScreen(),
+          UserEditForm.routeName: (context) => UserEditForm()
         },
       ),
     );
