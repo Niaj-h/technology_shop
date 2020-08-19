@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:technology/Screens/orderscreen.dart';
 import 'package:technology/models/cart.dart';
 
 class UserInfoUpdateless extends StatelessWidget {
@@ -29,6 +31,17 @@ class UserInfoUpdateless extends StatelessWidget {
                 transform: Matrix4.translationValues(-20, 0.0, 0.0),
                 child: Text('Your Favorites',
                     style: TextStyle(letterSpacing: 0.8))),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(OrdersScreen.routeName);
+            },
+            child: ListTile(
+              leading: Icon(FontAwesomeIcons.bitbucket),
+              title: Transform(
+                  transform: Matrix4.translationValues(-20, 0.0, 0.0),
+                  child: Text('Orders', style: TextStyle(letterSpacing: 0.8))),
+            ),
           )
         ],
       ),

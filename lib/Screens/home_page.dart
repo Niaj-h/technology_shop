@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:technology/Screens/cart_screen.dart';
-import 'package:technology/models/cart.dart';
-
+import 'package:technology/models/product.dart';
 import 'package:technology/widgets/other_products_carosel.dart';
 import 'package:technology/widgets/product_carosel.dart';
 
@@ -49,31 +48,39 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _pulltorefresh() async {
+      await Provider.of<ProductsProvider>(context).fetchdata();
+    }
+
     return Scaffold(
       body: SafeArea(
-        child:
-            ListView(padding: EdgeInsets.symmetric(vertical: 30.0), children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 120.0),
-            child: Text('What would you like to find???',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30.0,
-                )),
-          ),
-          SizedBox(height: 20.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: _icons
-                .asMap()
-                .entries
-                .map((MapEntry map) => _buildIcon(map.key))
-                .toList(),
-          ),
-          SizedBox(height: 20.0),
-          ProductCarosel(),
-          OtherCarosel()
-        ]),
+        child: RefreshIndicator(
+          onRefresh: () => _pulltorefresh(),
+          child: ListView(
+              padding: EdgeInsets.symmetric(vertical: 30.0),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0, right: 120.0),
+                  child: Text('What would you like to find???',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30.0,
+                      )),
+                ),
+                SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: _icons
+                      .asMap()
+                      .entries
+                      .map((MapEntry map) => _buildIcon(map.key))
+                      .toList(),
+                ),
+                SizedBox(height: 20.0),
+                ProductCarosel(),
+                OtherCarosel()
+              ]),
+        ),
       ),
     );
   }

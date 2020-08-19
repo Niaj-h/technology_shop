@@ -57,4 +57,9 @@ class CartProvider with ChangeNotifier {
     _cartdummydata.remove(dataid);
     notifyListeners();
   }
+
+  void clearcart() {
+    _cartdummydata = {};
+    notifyListeners();
+  }
 }

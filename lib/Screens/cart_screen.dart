@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:technology/models/cart.dart';
+import 'package:technology/models/orders.dart';
 import 'package:technology/widgets/listtilecart.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/CartScreen';
+  List<CartModel> cartProducts = [];
+
   @override
   Widget build(BuildContext context) {
     final cartiinfo = Provider.of<CartProvider>(context);
@@ -59,7 +62,12 @@ class CartScreen extends StatelessWidget {
             Container(
               margin: EdgeInsetsDirectional.only(start: 195),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Provider.of<Orders>(context, listen: false).addOrder(
+                      cartiinfo.cartdummydata.values.toList(),
+                      cartiinfo.gettotalsum());
+                  cartiinfo.clearcart();
+                },
                 child: Chip(
                   backgroundColor: Colors.black,
                   label: Text(

@@ -1,10 +1,9 @@
+import 'dart:convert';
 import 'dart:core';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:technology/Screens/userinfo_screen.dart';
 import '../models/userinfo.dart';
+import 'package:http/http.dart' as http;
 
 class UserEditForm extends StatefulWidget {
   static const routeName = '/usereditform';
@@ -26,6 +25,18 @@ class _UserEditFormState extends State<UserEditForm> {
       return;
     }
     _form.currentState.save();
+    const url = 'https://shop-app-2813.firebaseio.com/Userinfo.json';
+    http.post(
+      url,
+      body: json.encode(
+        {
+          'full name': myMap['fullname'],
+          'profession': myMap['profession'],
+          'gmail': myMap['email'],
+          'phone number': myMap['phonenumber']
+        },
+      ),
+    );
   }
 
   @override
